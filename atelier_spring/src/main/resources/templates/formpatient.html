@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="layout" >
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.0.0/dist/css/bootstrap.min.css" >
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+  <div class="card">
+<div class="card-header" th:if="${mode=='edit'}">
+  <h3> Update patient </h3>  
+</div>
+<div class="card-header" th:if="${mode=='new'}">
+  <h3> add patient </h3>  
+</div>
+<div class="card-body">
+<form th:action="@{savepatient}" method="post">
+    <div class="form-group">
+    <label class="form-label"> id : </label>
+   <label th:text="${patient.id}">   </label>
+     <input  type="hidden" name="id" th:value="${patient.id}"/>
+    </div>
+    <div class="form-group">
+    <label class="form-label"> Name </label>
+    <input class="form-control" type="text" name="name" th:value="${patient.name}"/>
+    <span th:errors="${patient.name}"></span>
+    </div>
+     <div class="form-group">
+    <label class="form-label"> data Naissance </label>
+    <input class="form-control" type="date" name="dataNaissance" th:value="${patient.dataNaissance}"/>
+    <span></span>
+    </div>
+     <div class="form-group">
+    <label class="form-label"> malade</label>
+    <input type="checkbox" name="malade" th:checked="${patient.malade}"/>
+    <span></span>
+    </div>
+     <div class="form-group">
+    <label class="form-label"> score </label>
+    <input class="form-control" type="text" name="score" th:value="${patient.score}"/>
+     <span th:errors="${patient.score}"></span>
+    <div class="from-group">
+    <button class="btn btn-primary" type="submit"> Save </button>
+    </div>
+    </div>
+    </form>
+</div>
+</div>
+    
+    </div>
+</div>
+</body>
+</html>
